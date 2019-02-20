@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+        box-sizing: border-box;
+        }
+
+        body{
+            background-color:#f1f1f1;
+            padding:10px;
+        }
+        .div1 {
+            padding: 5px;
+            width:250px;
+            border: 1px solid black;
+            background-color:white;
+        }
+
+        .leftcolumn{
+            float: left;
+            width: 40%;
+        }
+        .restaurant_post {
+            margin-top: 20px;
+            padding: 20px;
+            background-color:white;
+        }
+
+        .name_rest{
+            text-decoration: none;
+        }
+
+        .name_rest:hover {
+            text-decoration: underline;
+        }
+
+        div{
+            border: 1px solid black;
+        }
+
+        .rating{
+            display: inline-block;
+            color: rgb(255, 255, 255);
+            font-size: 15px;
+            background: rgb(176, 15, 1);
+            border-radius: 4px;
+            padding: 3px;
+            width: fit-content;
+        }
+
+        .img_rest{
+            border-radius: 6px;
+            width: 19%;
+            height: 80px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="div1">
+    <form action='' method='get'>
+        ค้นหา
+        <input type='text' name='search_txt' placeholder="ชื่อร้านอาหาร">
+        <input type='submit' value='ค้นหา'>
+    </form>
+</div>
+
+<div class="leftcolumn">
+    <div class="restaurant_post">
+        <a href=""
+        class="name_rest">
+        <h2 style="margin: 0px 0px 6px; font-family: sans-serif;">TITLE HEADING</h2>
+        </a>
+
+        <div class="rating">
+            <abbr >4.2</abbr>
+            <img style="height: 12px;
+                        width: 12px;" 
+            src="C:\Users\NWP\Desktop\star_rating_425874.png">
+        </div>
+
+        <div style="display: inline-block;
+        margin-left: 3px;">
+            <a href="/"
+            style="color: rgb(118, 121, 122);
+            font-size: 12px;
+            font-weight: bold;
+                text-decoration: none;">
+            100 รีวิว</a>
+        </div>
+
+        <hr style="border-top: 1px solid #eeeeee;">
+
+        <p style="color: rgb(153, 156, 158);"><b>ค่าเฟ่ อาหารคลีน/สลัด ไฮกรัม</b></p>
+
+        <div class="div_img_rest">
+            <img class="img_rest" src="">
+            <img class="img_rest" src="">
+            <img class="img_rest" src="">
+            <img class="img_rest" src="">
+            <img class="img_rest" src="">
+        </div>
+    </div>
+</div>
+</body>
