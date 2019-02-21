@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <style>
+        body{
+            font-family: Arial;
+            background-color:#f1f1f1;
+        }
+        * {
+        box-sizing: border-box;
+        }
+
+        div{
+            /*border: 1px solid black;*/
+        }
+
+        .container{
+            margin: auto;
+            width: 50%;
+        }
+
+        .div1{
+            background-color:white;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="div1">
+            <form action="{% url 'review:add_restaurant' %}" method='post'>
+                {% csrf_token %}
+                <h3>ชื่อร้านอาหาร :<h3>
+                <input type="text" name="name" maxlength="200" >
+                <h3>ที่อยู่ :<h3>
+                <textarea name="address" rows="8" cols="40" maxlength="200" ></textarea>
+                <h3>เบอร์โทรศัพท์ :</h3>
+                <input type="text" name="phone_number" maxlength="10" >
+                <br><br>
+                <input type="submit" name="action" value="Save">
+                <input type="submit" formaction="{% url 'review:index' %}" value="Cancel">
+            </form>
+            
+        </div>
+    </div>    
+
+</body>
