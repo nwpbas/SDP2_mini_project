@@ -27,6 +27,20 @@
             margin-bottom: 10px;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         }
+
+        .a_btn{
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 6px;
+            padding: 8px;
+            width: fit-content;
+            color:black;
+            text-decoration: none;
+        }
+
+        .a_btn:hover{
+            background-color: rgb(69, 179, 252);
+        }
     </style>
 </head>
 <body>
@@ -35,14 +49,14 @@
             <form action="{% url 'review:add_restaurant' %}" method='post'>
                 {% csrf_token %}
                 <h3>ชื่อร้านอาหาร :<h3>
-                <input type="text" name="name" maxlength="200" >
+                <input type="text" name="name" maxlength="200" required>
                 <h3>ที่อยู่ :<h3>
-                <textarea name="address" rows="8" cols="40" maxlength="200" ></textarea>
+                <textarea name="address" rows="8" cols="40" maxlength="200" required></textarea>
                 <h3>เบอร์โทรศัพท์ :</h3>
-                <input type="text" name="phone_number" maxlength="10" >
+                <input type="tel" name="phone_number" maxlength="10" required>
                 <br><br>
-                <input type="submit" name="action" value="Save">
-                <input type="submit" formaction="{% url 'review:index' %}" value="Cancel">
+                <input class="a_btn" type="submit" value="Save">
+                <a class="a_btn" href="{%url 'review:index' %}">Cancel</a>
             </form>
             
         </div>

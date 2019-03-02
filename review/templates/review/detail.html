@@ -3,6 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8"> 
+    {% load static %} 
     <style>
         body{
             font-family: Arial;
@@ -55,7 +56,7 @@
         .name_rest{
             position: relative;
             margin: 0px 0px 6px;
-            font-family: sans-serif;
+            
         }
 
         h3{
@@ -161,16 +162,13 @@
 <body>
     <div class="container">
         <div class="div1">
-            <h2 class="name_rest">White Day Patisserie Central Plaza Rama 9</h2>
+            <h2 class="name_rest">{{restaurant_obj.name}}</h2>
             <div class="rating">
                 <!-- <abbr><b>4.2<b></abbr> -->
-                <span>4.2</span> 
-                <img style="height: 17px;
-                            width: 17px;" 
-                src="C:\Users\NWP\Desktop\star_rating_425874.png">
-            </div>
-            <span>(58 รีวิว)</span> 
-            <img class="img_rest" src="C:\Users\NWP\Desktop\aaa.png">
+                <span>{{ restaurant_obj.rating }}</span> 
+                <img style="height: 17px; width: 17px;" src="{% static 'review\images\star_rating_425874.png' %}"></div>
+            <span>{{ amout_review_post }}</span> 
+            <img class="img_rest" src="{% static 'review\images\restaurant\restaurant-img-3.png' %}">
         </div>
 
         <div class="div2">
@@ -178,7 +176,7 @@
             <hr>
             <div class="row">
               <div class="side">
-                <div><img style="width: 90%;"src="C:\Users\NWP\Desktop\5 starrating.png"></div>
+                <div><img style="width: 90%;"src="{% static 'review\images\5 starrating.png' %}"></div>
               </div>
               <div class="middle">
                 <div class="bar-container">
@@ -189,7 +187,7 @@
                 <div>150</div>
               </div>
               <div class="side">
-                <div><img style="width: 90%;"src="C:\Users\NWP\Desktop\4 starrating.png"></div>
+                <div><img style="width: 90%;"src="{% static 'review\images\4 starrating.png' %}"></div>
               </div>
               <div class="middle">
                 <div class="bar-container">
@@ -200,7 +198,7 @@
                 <div>63</div>
               </div>
               <div class="side">
-                <div><img style="width: 90%;"src="C:\Users\NWP\Desktop\3 starrating.png"></div>
+                <div><img style="width: 90%;"src="{% static 'review\images\3 starrating.png' %}"></div>
               </div>
               <div class="middle">
                 <div class="bar-container">
@@ -211,7 +209,7 @@
                 <div>15</div>
               </div>
               <div class="side">
-                <div><img style="width: 90%;"src="2 starrating.png"></div>
+                <div><img style="width: 90%;"src="{% static 'review\images\2 starrating.png' %}"></div>
               </div>
               <div class="middle">
                 <div class="bar-container">
@@ -222,7 +220,7 @@
                 <div>6</div>
               </div>
               <div class="side">
-                <div><img style="width: 90%;"src="1 starrating.png"></div>
+                <div><img style="width: 90%;"src="{% static 'review\images\1 starrating.png' %}"></div>
               </div>
               <div class="middle">
                 <div class="bar-container">
@@ -235,76 +233,71 @@
             </div>            
         </div>
 
+        {% for obj in all_review_obj %}
         <div class="div3">
-            <img style="width: 8%;" src="user1.png">
-            <div style="display: inline-block;
-            width: 60%">
-                Name USER
-            </div>
-            <div style="display: inline-block;
-            width: 28%;
-            position:relative;
-            right: 0;
-            text-align: right;">
-                Date stamp
-            </div>
+            <img style="width: 8%;" src="{% static 'review\images\user\user2.png'%} ">
+
+            <div style="display: inline-block; width: 60%">Name USER</div>
+
+            <div style="display: inline-block; width: 28%; position:relative; right: 0; text-align: right;">{{obj.timestamp}}</div>
+
             <div style="padding: 5px 0px;">
-                <img style="width: 17%;"src="1 starrating.png">
-            </div>
-            <div style="padding: 10px 0px">
-                <h3>เค้กอร่อยดีค่ะ พนักงานยิ้มแย้มแจ่มใสอารมณ์ดี</h3>
-            </div>
-            <div style="height: fit-content;
-            word-wrap: break-word;
-            overflow-y: auto;">
-                textreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtex
-            </div>
-            <hr>
-            <div >
-                <img class="img_review" src="C:\Users\NWP\Desktop\asd.png">
-                <img class="img_review" src="C:\Users\NWP\Desktop\aaa.png">
-                <img class="img_review" src="C:\Users\NWP\Desktop\moutain.png">
-                <img class="img_review" src="C:\Users\NWP\Desktop\asd.png">
-                <img class="img_review" src="C:\Users\NWP\Desktop\moutain.png">
-            </div>
-        </div>
+              {% if obj.rating == 1 %}
+                <img style="width: 17%;"src="{% static 'review\images\1 starrating.png'%}"></div>
+              {% elif obj.rating == 2 %}
+                <img style="width: 17%;"src="{% static 'review\images\2 starrating.png'%}"></div>
+              {% elif obj.rating == 3 %}
+                <img style="width: 17%;"src="{% static 'review\images\3 starrating.png'%}"></div>
+              {% elif obj.rating == 4 %}
+                <img style="width: 17%;"src="{% static 'review\images\4 starrating.png'%}"></div>
+              {% elif obj.rating == 5 %}
+                <img style="width: 17%;"src="{% static 'review\images\5 starrating.png'%}"></div>
+              {% endif %}
+                
 
-        <div class="div3">
-            <img style="width: 8%;" src="user2.png">
-            <div style="display: inline-block;
-            width: 60%">
-                Name USER
-            </div>
-            <div style="display: inline-block;
-            width: 28%;
-            position:relative;
-            right: 0;
-            text-align: right;">
-                Date stamp
-            </div>
+            <div style="padding: 10px 0px">
+                <h3>{{obj.review_topic}}</h3></div>
+
+            <div style="height: fit-content; word-wrap:break-word; overflow-y: auto;">{{obj.review_datail}}</div>
+            
+            <hr>
+
+            <div >
+              <img class="img_review" src="{% static 'review\images\review_post\review-img-1.png' %}">
+              <img class="img_review" src="{% static 'review\images\review_post\review-img-2.png' %}">
+              <img class="img_review" src="{% static 'review\images\review_post\review-img-3.png' %}">
+              <img class="img_review" src="{% static 'review\images\review_post\review-img-6.png' %}">
+              <img class="img_review" src="{% static 'review\images\review_post\review-img-7.png' %}"></div>
+        </div>
+        {% endfor %}
+
+        <!-- <div class="div3">
+            <img style="width: 8%;" src="{% static 'review\images\user\user2.png' %}">
+
+            <div style="display: inline-block; width: 60%">Name USER</div>
+
+            <div style="display: inline-block; width: 28%; position:relative; right: 0; text-align: right;">Date stamp</div>
+
             <div style="padding: 5px 0px;">
-                <img style="width: 17%;"src="3 starrating.png">
-            </div>
+                <img style="width: 17%;"src="{% static 'review\images\3 starrating.png' %}"></div>
+
             <div style="padding: 10px 0px">
-                <h3>คาคิโกริน้ำเต้าหู้เพื่อสุขภาพ</h3>
-            </div>
-            <div style="height: fit-content;
-            word-wrap: break-word;
-            overflow-y: auto;">
-                textreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtex
+                <h3>Topic Review</h3></div>
 
-            </div>
+            <div style="height: fit-content; word-wrap: break-word; overflow-y: auto;">
+                textreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtextreviewtex</div>
             <hr>
-            <div >
-                <img class="img_review" src="C:\Users\NWP\Desktop\asd.png">
-                <img class="img_review" src="C:\Users\NWP\Desktop\aaa.png">
-                <img class="img_review" src="C:\Users\NWP\Desktop\moutain.png">
-                <img class="img_review" src="C:\Users\NWP\Desktop\asd.png">
-                <img class="img_review" src="C:\Users\NWP\Desktop\moutain.png">
-            </div>
-        </div>
 
-        <a class="write_review_btn" href="">เขียนริวิว</a>
+            <div >
+              <img class="img_review" src="{% static 'review\images\review_post\review-img-1.png' %}">
+              <img class="img_review" src="{% static 'review\images\review_post\review-img-2.png' %}">
+              <img class="img_review" src="{% static 'review\images\review_post\review-img-3.png' %}">
+              <img class="img_review" src="{% static 'review\images\review_post\review-img-6.png' %}">
+              <img class="img_review" src="{% static 'review\images\review_post\review-img-7.png' %}"></div>
+        </div> -->
+
+        <a class="write_review_btn" href="{% url 'review:form_write_review' restaurant_obj.id %}">เขียนริวิว</a>
+        
     </div>
 
     

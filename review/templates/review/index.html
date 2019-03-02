@@ -54,7 +54,7 @@
         .rating{
             display: inline-block;
             color: rgb(255, 255, 255);
-            font-size: 15px;
+            font-size: 10px;
             background: rgb(176, 15, 1);
             border-radius: 4px;
             padding: 3px;
@@ -90,49 +90,35 @@
 <div class="container">
 
     <div class="div1">
+        <div style="display: inline-block;">ค้นหา :</div>
         <div style="display: inline-block;">
-            ค้นหา :
-        </div>
-        <div style="display: inline-block;">
-        <form action='' method='get'>
-            <input type='text' name='search_txt' placeholder="ใ่ชื่อร้านอาหาร">
-                <input type="image" src="{% static 'review\images\icons8-search-480.png' %}" alt="Submit" width="20px" height="20px">
-            
-        </form>
-        </div>
+            <form action='' method='get'>
+                <input type='text' name='search_txt' placeholder="ใ่ชื่อร้านอาหาร">
+                <input type="image" src="{% static 'review\images\icons8-search-480.png' %}" alt="Submit" width="20px" height="20px"></form></div>
     </div>
 
     <div class="leftcolumn">
       {% for obj in restaurant_obj_list%}
         <div class="restaurant_post">
-            <a href="{% url 'review:detail' obj.id %}"
-            class="name_rest">
-            <h2>{{ obj.name }}</h2>
-            </a>
+            <a href="{% url 'review:detail' obj.id %}" class="name_rest"><h2>{{ obj.name }}</h2></a>
+
             <div class="rating">
                 <abbr >{{ obj.rating }}</abbr>
-                <img style="height: 12px;
-                            width: 12px;" 
-                src="{% static 'review\images\star_rating_425874.png' %}">
-            </div>
-            <div style="display: inline-block;
-            margin-left: 3px;">
-                <a href="/"
-                style="color: rgb(118, 121, 122);
-                font-size: 12px;
-                font-weight: bold;
-                    text-decoration: none;">
-                {{ amout_review_post }}</a>
-            </div>
+                <img style="height: 8px; width: 8px;" src="{% static 'review\images\star_rating_425874.png' %}"></div>
+
+            <div style="display: inline-block; margin-left: 3px;">
+                <a href="/" style="color: rgb(118, 121, 122); font-size: 12px; font-weight: bold; text-decoration: none;"> {{ amount_review_post }}</a></div>
+
             <hr style="border-top: 1px solid #eeeeee;">
+
             <p style="color: rgb(153, 156, 158);"><b>ประเภทอาหาร ????</b></p>
+
             <div >
                 <img class="img_rest" src="{% static 'review\images\review_post\review-img-1.png' %}">
                 <img class="img_rest" src="{% static 'review\images\review_post\review-img-2.png' %}">
                 <img class="img_rest" src="{% static 'review\images\review_post\review-img-3.png' %}">
                 <img class="img_rest" src="{% static 'review\images\review_post\review-img-6.png' %}">
-                <img class="img_rest" src="{% static 'review\images\review_post\review-img-7.png' %}">
-            </div>
+                <img class="img_rest" src="{% static 'review\images\review_post\review-img-7.png' %}"></div>
         </div>
         {% endfor %}
     </div>
