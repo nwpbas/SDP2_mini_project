@@ -48,12 +48,57 @@
         <div class="div1">
             <form action="{% url 'review:add_restaurant' %}" method='post'>
                 {% csrf_token %}
-                <h3>ชื่อร้านอาหาร :<h3>
+                <h3>ชื่อร้านอาหาร <span style="color:red;">*</span><h3>
                 <input type="text" name="name" maxlength="200" required>
-                <h3>ที่อยู่ :<h3>
-                <textarea name="address" rows="8" cols="40" maxlength="200" required></textarea>
-                <h3>เบอร์โทรศัพท์ :</h3>
-                <input type="tel" name="phone_number" maxlength="10" required>
+                <h3>ประเภทอาหาร <span style="color:red;">*</span></h3>
+                <select name="category" style="width:30%; min-width: 100px;" required>
+                    <option value="" disabled selected hidden></option>
+                    {% for category in category_list %}
+                    <option value={{category.id}}>{{category.name}}</option>
+                    {% endfor %}
+                </select><span style="color:red;"> *</span><br><br>
+                <select name="category" style="width:30%; min-width: 100px;">
+                    <option value=""></option>
+                    {% for category in category_list %}
+                    <option value={{category.id}}>{{category.name}}</option>
+                    {% endfor %}
+                </select><br><br>
+                <select name="category" style="width:30%; min-width: 100px;">
+                    <option value=""></option>
+                    {% for category in category_list %}
+                    <option value={{category.id}}>{{category.name}}</option>
+                    {% endfor %}
+                </select><br><br>
+                <select name="category" style="width:30%; min-width: 100px;">
+                    <option value=""></option>
+                    {% for category in category_list %}
+                    <option value={{category.id}}>{{category.name}}</option>
+                    {% endfor %}
+                </select><br><br>
+                <select name="category" style="width:30%; min-width: 100px;">
+                    <option value=""></option>
+                    {% for category in category_list %}
+                    <option value={{category.id}}>{{category.name}}</option>
+                    {% endfor %}
+                </select><br><br>
+                <select name="category" style="width:30%; min-width: 100px;">
+                    <option value=""></option>
+                    {% for category in category_list %}
+                    <option value={{category.id}}>{{category.name}}</option>
+                    {% endfor %}
+                </select>
+                <h3>ที่อยู่ <span style="color:red;">*</span><h3>
+                <input type="text" name="address" style="width:50%;" required>
+                <h3>จังหวัด <span style="color:red;">*</span><h3>
+                <input type="text" name="province" style="width:50%;" required>
+                <h3>เขต/อำเภอ <span style="color:red;">*</span><h3>
+                <input type="text" name="area" style="width:50%;">
+                <h3>แขวง/ตำบล <span style="color:red;">*</span><h3>
+                <input type="text" name="sub_area" style="width:50%;">
+                <h3>รหัสไปรษณีย์<h3>
+                <input type="text" name="postal_code" pattern="[0-9]*" minlength="5" maxlength="5" style="width:50%;">
+                <h3>เบอร์โทรศัพท์</h3>
+                <input type="tel" name="phone_number" maxlength="10" >
                 <br><br>
                 <input class="a_btn" type="submit" value="Save">
                 <a class="a_btn" href="{%url 'review:index' %}">Cancel</a>

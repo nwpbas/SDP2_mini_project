@@ -27,6 +27,9 @@
         }
 
         .left-side{
+            /* position: -webkit-sticky;
+            position: sticky;
+            top: 8px; */
             width: 25%;
             padding: 0 13px;
         }
@@ -51,17 +54,19 @@
         }
 
         .name_rest{
+            color: black;
             text-decoration: none;
         }
 
         .name_rest:hover {
+            color:deeppink;
             text-decoration: underline;
         }
 
         .rating{
             display: inline-block;
             color: rgb(255, 255, 255);
-            font-size: 10px;
+            font-size: 12px;
             background: rgb(176, 15, 1);
             border-radius: 4px;
             padding: 3px;
@@ -70,7 +75,7 @@
 
         .img_review{
             border-radius: 6px;
-            width: 19.4%;
+            width: 19%;
             height: 80px;
         }
 
@@ -86,6 +91,17 @@
 
         .add_btn:hover{
             background-color: rgb(220,220,220);
+        }
+
+        a.amount_review{
+            color: rgb(156, 156, 156); 
+            font-size: 12px; 
+            font-weight: bolder;
+            text-decoration: none;
+        }
+
+        a.amount_review:hover, a.amount_review:focus{
+            text-decoration: underline;
         }
 
         .row:after {
@@ -113,39 +129,19 @@
         <div class="search">
             <div>ค้นหา :</div>
             <div>
-                <form action='' method='get'>
-                    <input type='text' name='search_txt' placeholder="ใ่ชื่อร้านอาหาร">
+                <form action="{%url 'review:index'%}" method='get'>
+                    <input type='text' name='restaurant_name' maxlength="200" placeholder="ใส่ชื่อร้านอาหาร" value="">
                     <input type="submit" value="ค้นหา"></form></div>
             
             <hr style="margin-top:15px; border: 0; border-top: 1px solid #cccccc;">
 
             <div>ประเภทอาหาร :</div>
-            <form >
-                <select name="category" style="width:50%; min-width: 100px;" placeholder="ใ่ชื่อร้านอาหาร">
+            <form action="" method='get'>
+                <select name="category" style="width:50%; min-width: 100px;">
                     <option value="" disabled selected hidden></option>
-                    <option value="ก๋วยเตี๋ยว">ก๋วยเตี๋ยว</option>
-                    <option value="อาหารตามสั่ง">อาหารตามสั่ง</option>
-                    <option value="เบเกอรี/เค้ก">เบเกอรี/เค้ก</option>
-                    <option value="ของหวาน">ของหวาน</option>
-                    <option value="เครื่องดื่ม/น้ำผลไม้">เครื่องดื่ม/น้ำผลไม้</option>
-                    <option value="สเต๊ก">สเต๊ก</option>
-                    <option value="อาหารทะเล">อาหารทะเล</option>
-                    <option value="อาหารจานเดียว">อาหารจานเดียว</option>
-                    <option value="ไอศกรีม">ไอศกรีม</option>
-                    <option value="ฟาสต์ฟู้ด/จานด่วน">ฟาสต์ฟู้ด/จานด่วน</option>
-                    <option value="ชาบู/สุกี้ยากี้/หม้อไฟ">ชาบู/สุกี้ยากี้/หม้อไฟ</option>
-                    <option value="บุฟเฟ่ต์">บุฟเฟ่ต์</option>
-                    <option value="อาหารเช้า">อาหารเช้า</option>
-                    <option value="ปิ้งย่าง">ปิ้งย่าง</option>
-                    <option value="อาหารคลีน/สลัด">อาหารคลีน/สลัด</option>
-                    <option value="หมูกระทะ">หมูกระทะ</option>
-                    <option value="พิซซ่า">พิซซ่า</option>
-                    <option value="ซูชิ">ซูชิ</option>
-                    <option value="ชานมไข่มุก">ชานมไข่มุก</option>
-                    <option value="ราเมง">ราเมง</option>
-                    <option value="เบอร์เกอร์">เบอร์เกอร์</option>
-                    <option value="อาหารมังสวิรัติ">อาหารมังสวิรัติ</option>
-                    <option value="ติ่มซำ">ติ่มซำ</option>
+                    {% for category in category_list %}
+                    <option value={{category.id}}>{{category.name}}</option>
+                    {% endfor %}
                 </select>
                 <input type="submit" value="ค้นหา">
             </form>
@@ -159,14 +155,23 @@
 
             <div class="rating">
                 <abbr >{{ obj.rating }}</abbr>
-                <img style="height: 8px; width: 8px;" src="{% static 'review\images\star_rating_425874.png' %}"></div>
+                <img style="height: 10px; width: 10px;" src="{% static 'review\images\star_rating_425874.png' %}"></div>
 
             <div style="display: inline-block; margin-left: 3px;">
-                <a href="/" style="color: rgb(118, 121, 122); font-size: 12px; font-weight: bold; text-decoration: none;"> {{ amount_review_post }}</a></div>
+                <a href="{% url 'review:detail' obj.id %}" class="amount_review">({{ obj.reviewpost_set.all.count }} รีวิว)</a></div>
 
             <hr style="border: 0; border-top: 1px solid #e0e0e0;">
 
-            <p style="color: rgb(153, 156, 158);"><b>ประเภทอาหาร ????</b></p>
+            <p style="color: rgb(153, 156, 158);"><b>ประเภทอาหาร : 
+                {% for cate_obj in obj.category.all %}
+                    {% if forloop.last %}
+                        {{ cate_obj.name }}
+                    {% else %}
+                        {{ cate_obj.name }},
+                    {% endif %}
+                    
+                {% endfor %}
+            </b></p>
 
             <div >
                 <img class="img_review" src="{% static 'review\images\review_post\review-img-1.png' %}">

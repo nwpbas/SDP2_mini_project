@@ -2,22 +2,44 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
-from .models import Restaurant, ReviewPost
+from .models import Restaurant, ReviewPost, FoodCategory, Categorize
 
 def index(request):
-    restaurant_obj_list = Restaurant.objects.all()
-    context = {"restaurant_obj_list":restaurant_obj_list,}
-    print(context)
+    if "restaurant_name" in request.GET:
+        restaurant_obj_list = Restaurant.objects.filter(name__icontains=request.GET["restaurant_name"]).order_by('-id')
+    elif "category" in request.GET:
+        restaurant_obj_list = Restaurant.objects.filter(category__pk=request.GET["category"]).order_by('name')
+    else:
+        restaurant_obj_list = Restaurant.objects.all().order_by('-id')
+    
+    category_list = FoodCategory.objects.all().order_by('name')
+    context = { "restaurant_obj_list":restaurant_obj_list,
+                "category_list":category_list, }
     return render(request,"review/index.html",context)
 
 def formAddRestaurant(request):
-    return render(request,'review/add_restaurant.html')
+    category_list = FoodCategory.objects.all().order_by('name')
+    context = {"category_list":category_list}
+    return render(request,'review/add_restaurant.html', context)
 
 def addRestaurant(request):
     name = request.POST['name']
     address = request.POST['address']
+    province = request.POST['province']
+    area = request.POST['area']
+    sub_area = request.POST['sub_area']
+    postal_code = request.POST['postal_code']
     phone_number = request.POST['phone_number']
-    Restaurant.objects.create(name=name, address=address, phone_number=phone_number)
+    for val in (area, sub_area, province, postal_code):
+        if len(val) != 0:
+            address += " "+val
+    restaurant_obj = Restaurant.objects.create(name=name, address=address, phone_number=phone_number)
+    # category_obj = FoodCategory.objects.filter(name=request.POST['category'])[0]
+    # category_obj = FoodCategory.objects.get(pk=request.POST['category'])
+    # print(request.POST.getlist('category'))
+    category_obj_list = [FoodCategory.objects.get(pk=int(id)) for id in request.POST.getlist('category') if id != ""]
+    for obj in category_obj_list:
+        Categorize.objects.create(restaurant=restaurant_obj, category=obj)
     return HttpResponseRedirect( reverse('review:index') )
 
 def detailRest(request, id_rest):
