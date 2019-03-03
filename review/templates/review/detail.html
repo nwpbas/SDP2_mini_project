@@ -46,7 +46,7 @@
         .rating{
             display: inline-block;
             color: rgb(255, 255, 255);
-            font-size: 19px;
+            font-size: 15px;
             background: rgb(176, 15, 1);
             border-radius: 4px;
             padding: 0px 5px 0px 5px;
@@ -93,6 +93,19 @@
             background-color: rgb(220,220,220);
         }
 
+        .t_review{
+          font-weight: bold;
+          font-size: 18px;
+          padding: 10px 0px
+        }
+
+        .review{
+          color: rgb(118, 121, 122);
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          font-size: 14px;
+        }
+
 
         .heading {
           font-size: 25px;
@@ -135,17 +148,18 @@
         /* The bar container */
         .bar-container {
           width: 100%;
-          background-color: #f1f1f1;
+          background-color: #eeeeee;
           text-align: center;
           color: white;
         }
 
         /* Individual bars */
-        .bar-5 {width: 60%; height: 18px; background-color: #4CAF50;}
-        .bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
-        .bar-3 {width: 10%; height: 18px; background-color: #00bcd4;}
-        .bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
-        .bar-1 {width: 15%; height: 18px; background-color: #f44336;}
+
+        .bar-5 {width: {{bar_5_w}}%; height: 18px; background-color: #4CAF50;}
+        .bar-4 {width: {{bar_4_w}}%; height: 18px; background-color: #2196F3;}
+        .bar-3 {width: {{bar_3_w}}%; height: 18px; background-color: #00bcd4;}
+        .bar-2 {width: {{bar_2_w}}%; height: 18px; background-color: #ff9800;}
+        .bar-1 {width: {{bar_1_w}}%; height: 18px; background-color: #f44336;}
 
         /* Responsive layout - make the columns stack on top of each other instead of next to each other */
         @media (max-width: 400px) {
@@ -166,9 +180,9 @@
             <div class="rating">
                 <!-- <abbr><b>4.2<b></abbr> -->
                 <span>{{ restaurant_obj.rating }}</span> 
-                <img style="height: 17px; width: 17px;" src="{% static 'review\images\star_rating_425874.png' %}"></div>
+                <img style="height: 13px; width: 13px;" src="{% static 'review\images\star_rating_425874.png' %}"></div>
             <span>{{ amout_review_post }}</span> 
-            <img class="img_rest" src="{% static 'review\images\restaurant\restaurant-img-3.png' %}">
+            <img class="img_rest" src="{% static 'review\images\no_img.png' %}">
         </div>
 
         <div class="div2">
@@ -180,11 +194,11 @@
               </div>
               <div class="middle">
                 <div class="bar-container">
-                  <div class="bar-5"></div>
+                  <div class="bar-5" ></div>
                 </div>
               </div>
               <div class="side right">
-                <div>150</div>
+                <div>{{amt_5_rating}}</div>
               </div>
               <div class="side">
                 <div><img style="width: 90%;"src="{% static 'review\images\4 starrating.png' %}"></div>
@@ -195,7 +209,7 @@
                 </div>
               </div>
               <div class="side right">
-                <div>63</div>
+                <div>{{amt_4_rating}}</div>
               </div>
               <div class="side">
                 <div><img style="width: 90%;"src="{% static 'review\images\3 starrating.png' %}"></div>
@@ -206,7 +220,7 @@
                 </div>
               </div>
               <div class="side right">
-                <div>15</div>
+                <div>{{amt_3_rating}}</div>
               </div>
               <div class="side">
                 <div><img style="width: 90%;"src="{% static 'review\images\2 starrating.png' %}"></div>
@@ -217,7 +231,7 @@
                 </div>
               </div>
               <div class="side right">
-                <div>6</div>
+                <div>{{amt_2_rating}}</div>
               </div>
               <div class="side">
                 <div><img style="width: 90%;"src="{% static 'review\images\1 starrating.png' %}"></div>
@@ -228,7 +242,7 @@
                 </div>
               </div>
               <div class="side right">
-                <div>20</div>
+                <div>{{amt_1_rating}}</div>
               </div>
             </div>            
         </div>
@@ -243,31 +257,30 @@
 
             <div style="padding: 5px 0px;">
               {% if obj.rating == 1 %}
-                <img style="width: 17%;"src="{% static 'review\images\1 starrating.png'%}"></div>
+                <img style="height:15px;"src="{% static 'review\images\1 starrating.png'%}"></div>
               {% elif obj.rating == 2 %}
-                <img style="width: 17%;"src="{% static 'review\images\2 starrating.png'%}"></div>
+                <img style="height:15px;"src="{% static 'review\images\2 starrating.png'%}"></div>
               {% elif obj.rating == 3 %}
-                <img style="width: 17%;"src="{% static 'review\images\3 starrating.png'%}"></div>
+                <img style="height:15px;"src="{% static 'review\images\3 starrating.png'%}"></div>
               {% elif obj.rating == 4 %}
-                <img style="width: 17%;"src="{% static 'review\images\4 starrating.png'%}"></div>
+                <img style="height:15px;"src="{% static 'review\images\4 starrating.png'%}"></div>
               {% elif obj.rating == 5 %}
-                <img style="width: 17%;"src="{% static 'review\images\5 starrating.png'%}"></div>
+                <img style="height:15px;"src="{% static 'review\images\5 starrating.png'%}"></div>
               {% endif %}
-                
 
-            <div style="padding: 10px 0px">
-                <h3>{{obj.review_topic}}</h3></div>
+            <div class='t_review'>{{obj.review_topic}}</div>
 
-            <div style="height: fit-content; word-wrap:break-word; overflow-y: auto;">{{obj.review_datail}}</div>
+            <p class="review">{{obj.review_datail}}</p>
+            <!-- <div style="height: fit-content; word-wrap:break-word; overflow-y: auto; color: rgb(118, 121, 122)">{{obj.review_datail|linebreaks}}</div> -->
             
             <hr>
 
             <div >
-              <img class="img_review" src="{% static 'review\images\review_post\review-img-1.png' %}">
-              <img class="img_review" src="{% static 'review\images\review_post\review-img-2.png' %}">
-              <img class="img_review" src="{% static 'review\images\review_post\review-img-3.png' %}">
-              <img class="img_review" src="{% static 'review\images\review_post\review-img-6.png' %}">
-              <img class="img_review" src="{% static 'review\images\review_post\review-img-7.png' %}"></div>
+              <img class="img_review" src="{% static 'review\images\no_img.png' %}">
+              <img class="img_review" src="{% static 'review\images\no_img.png' %}">
+              <img class="img_review" src="{% static 'review\images\no_img.png' %}">
+              <img class="img_review" src="{% static 'review\images\no_img.png' %}">
+              <img class="img_review" src="{% static 'review\images\no_img.png' %}"></div>
         </div>
         {% endfor %}
 

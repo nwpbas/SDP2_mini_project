@@ -46,7 +46,18 @@ def detailRest(request, id_rest):
     restaurant_obj = Restaurant.objects.get(pk=id_rest)
     all_review_obj = ReviewPost.objects.filter(restaurant_id=id_rest).order_by('-timestamp')
     context = {'restaurant_obj':restaurant_obj,
-                'all_review_obj':all_review_obj,}  
+                'all_review_obj':all_review_obj,
+                }
+    all_rating = [rp.rating for rp in ReviewPost.objects.filter(restaurant__pk=id_rest)]
+    total_review = len(all_rating)
+    for i in range(5):
+        if total_review == 0:   
+            context["bar_"+str(i+1)+"_w"] = 0
+            context["amt_"+str(i+1)+"_rating"] = 0
+        else:
+            context["amt_"+str(i+1)+"_rating"] = all_rating.count(i+1)
+            context["bar_"+str(i+1)+"_w"] = round(((all_rating.count((i+1))/total_review)*100),2)
+
     return render(request,"review/detail.html",context)
 
 def formWriteReview(request, id_rest):
@@ -61,6 +72,13 @@ def addReview(request):
     r_detail = request.POST['review_detail']
     rating = request.POST['rating']
     restaurant_obj.reviewpost_set.create(review_topic=r_topic, review_datail=r_detail, rating=rating)
+    all_rating = ReviewPost.objects.filter(restaurant__pk=request.POST['restaurant_id'])
+    total_rating = 0.0
+    for obj in all_rating:
+        total_rating += obj.rating
+    avg_rating = total_rating / len(all_rating)
+    restaurant_obj.rating = avg_rating
+    restaurant_obj.save()
     return HttpResponseRedirect( reverse('review:detail', args=(request.POST['restaurant_id'],)) )
 
 
