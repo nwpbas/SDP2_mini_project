@@ -6,7 +6,7 @@
     {% load static %} 
     <style>
         * {
-        box-sizing: border-box;
+            box-sizing: border-box;
         }
 
         body{
@@ -22,23 +22,30 @@
             margin: 0px 0px 7px;
         }
 
-        .container{
-            margin: auto;
+        .column {
+            float: left;
+        }
+
+        .left-side{
+            width: 25%;
+            padding: 0 13px;
+        }
+
+        .right-side{
+        }
+
+        .middle{
             width: 50%;
         }
 
-        .div1 {
-            padding: 5px;
-            border: 1px solid black;
+        .search{
+            padding: 15px;
             background-color:white;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         }
-
-        .leftcolumn{
-        }
-
         .restaurant_post {
-            margin-top: 13px;
-            padding: 20px;
+            margin-bottom: 13px;
+            padding: 15px;
             background-color:white;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         }
@@ -61,14 +68,13 @@
             width: fit-content;
         }
 
-        .img_rest{
+        .img_review{
             border-radius: 6px;
-            width: 19%;
+            width: 19.4%;
             height: 80px;
         }
 
-        .add_rest{
-            margin-top: 20px;
+        .add_btn{
             background-color: white;
             border: 1px solid black;
             border-radius: 6px;
@@ -78,8 +84,14 @@
             display: inline-block;
         }
 
-        .add_rest:hover{
+        .add_btn:hover{
             background-color: rgb(220,220,220);
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
         }
 
     </style>
@@ -87,17 +99,60 @@
 
 <body>
 
-<div class="container">
+<div class="row">
 
-    <div class="div1">
+    <!-- <div class="div1">
         <div style="display: inline-block;">ค้นหา :</div>
         <div style="display: inline-block;">
             <form action='' method='get'>
                 <input type='text' name='search_txt' placeholder="ใ่ชื่อร้านอาหาร">
-                <input type="image" src="{% static 'review\images\icons8-search-480.png' %}" alt="Submit" width="20px" height="20px"></form></div>
+                <input type="image" src="{% static 'review\images\icons8-search-480.png' %}" alt="Submit" width="20px" height="20px" style="float:right; margin-left: 5px;"></form></div>
+    </div> -->
+
+    <div class="column left-side">        
+        <div class="search">
+            <div>ค้นหา :</div>
+            <div>
+                <form action='' method='get'>
+                    <input type='text' name='search_txt' placeholder="ใ่ชื่อร้านอาหาร">
+                    <input type="submit" value="ค้นหา"></form></div>
+            
+            <hr style="margin-top:15px; border: 0; border-top: 1px solid #cccccc;">
+
+            <div>ประเภทอาหาร :</div>
+            <form >
+                <select name="category" style="width:50%; min-width: 100px;" placeholder="ใ่ชื่อร้านอาหาร">
+                    <option value="" disabled selected hidden></option>
+                    <option value="ก๋วยเตี๋ยว">ก๋วยเตี๋ยว</option>
+                    <option value="อาหารตามสั่ง">อาหารตามสั่ง</option>
+                    <option value="เบเกอรี/เค้ก">เบเกอรี/เค้ก</option>
+                    <option value="ของหวาน">ของหวาน</option>
+                    <option value="เครื่องดื่ม/น้ำผลไม้">เครื่องดื่ม/น้ำผลไม้</option>
+                    <option value="สเต๊ก">สเต๊ก</option>
+                    <option value="อาหารทะเล">อาหารทะเล</option>
+                    <option value="อาหารจานเดียว">อาหารจานเดียว</option>
+                    <option value="ไอศกรีม">ไอศกรีม</option>
+                    <option value="ฟาสต์ฟู้ด/จานด่วน">ฟาสต์ฟู้ด/จานด่วน</option>
+                    <option value="ชาบู/สุกี้ยากี้/หม้อไฟ">ชาบู/สุกี้ยากี้/หม้อไฟ</option>
+                    <option value="บุฟเฟ่ต์">บุฟเฟ่ต์</option>
+                    <option value="อาหารเช้า">อาหารเช้า</option>
+                    <option value="ปิ้งย่าง">ปิ้งย่าง</option>
+                    <option value="อาหารคลีน/สลัด">อาหารคลีน/สลัด</option>
+                    <option value="หมูกระทะ">หมูกระทะ</option>
+                    <option value="พิซซ่า">พิซซ่า</option>
+                    <option value="ซูชิ">ซูชิ</option>
+                    <option value="ชานมไข่มุก">ชานมไข่มุก</option>
+                    <option value="ราเมง">ราเมง</option>
+                    <option value="เบอร์เกอร์">เบอร์เกอร์</option>
+                    <option value="อาหารมังสวิรัติ">อาหารมังสวิรัติ</option>
+                    <option value="ติ่มซำ">ติ่มซำ</option>
+                </select>
+                <input type="submit" value="ค้นหา">
+            </form>
+        </div>
     </div>
 
-    <div class="leftcolumn">
+    <div class="column middle">
       {% for obj in restaurant_obj_list%}
         <div class="restaurant_post">
             <a href="{% url 'review:detail' obj.id %}" class="name_rest"><h2>{{ obj.name }}</h2></a>
@@ -109,21 +164,22 @@
             <div style="display: inline-block; margin-left: 3px;">
                 <a href="/" style="color: rgb(118, 121, 122); font-size: 12px; font-weight: bold; text-decoration: none;"> {{ amount_review_post }}</a></div>
 
-            <hr style="border-top: 1px solid #eeeeee;">
+            <hr style="border: 0; border-top: 1px solid #e0e0e0;">
 
             <p style="color: rgb(153, 156, 158);"><b>ประเภทอาหาร ????</b></p>
 
             <div >
-                <img class="img_rest" src="{% static 'review\images\review_post\review-img-1.png' %}">
-                <img class="img_rest" src="{% static 'review\images\review_post\review-img-2.png' %}">
-                <img class="img_rest" src="{% static 'review\images\review_post\review-img-3.png' %}">
-                <img class="img_rest" src="{% static 'review\images\review_post\review-img-6.png' %}">
-                <img class="img_rest" src="{% static 'review\images\review_post\review-img-7.png' %}"></div>
+                <img class="img_review" src="{% static 'review\images\review_post\review-img-1.png' %}">
+                <img class="img_review" src="{% static 'review\images\review_post\review-img-2.png' %}">
+                <img class="img_review" src="{% static 'review\images\review_post\review-img-3.png' %}">
+                <img class="img_review" src="{% static 'review\images\review_post\review-img-6.png' %}">
+                <img class="img_review" src="{% static 'review\images\review_post\review-img-7.png' %}"></div>
         </div>
         {% endfor %}
+
+        <a class="add_btn" href="{%url 'review:form_add_restaurant'%}">เพิ่มร้าน</a>
+
     </div>
-    
-    <a class="add_rest" href="{%url 'review:form_add_restaurant'%}">เพิ่มร้าน</a>
 
 </div>
 
